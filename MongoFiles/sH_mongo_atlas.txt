@@ -1,0 +1,5 @@
+KDA988romtUDURkN0d30z - deoz_user
+
+
+
+mongodb+srv://deoz_user:<password>@cluster0.7lcvj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
