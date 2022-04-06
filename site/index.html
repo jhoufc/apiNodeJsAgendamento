@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- <meta name="viewport" content="initial-scale=1"> -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+        $(document).on("click", ".btn-login", () =>{
+                console.log('clique')
+                const user = $(".login-body #user").val();
+                const password = $(".login-body #password").val();
+                if(valideFields())
+                    loginSystem(user, password);
+        });
+
+        const valideFields = () =>
+        {
+            return true;
+        }
+        const loginSystem = (user, password) =>
+        {
+            $.ajax(
+            {
+                method: "POST",
+                url: "http://localhost:2022/users/auth",		
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({cpf: user,password: password }),
+                success: function(result) 
+                {
+                    console.log(result);
+                    // if(result.d.Success){
+                    //     if(result.d.Data != null)
+                    //     {
+                    //         console.log(result.d.Data)				
+                    //     }
+                    // }
+                },
+                error: function(err)
+                {
+                    console.log(err);
+                }
+            });    
+        }
+        </script>
+        <style>
+            body{    padding: 0;    margin: 0;    border: 0;}
+            .content {position: absolute; width: 100%; height: 100%; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center;}
+            .content .login-register-area{    position: relative;    width: 80%;    height: 80%;    display: flex;    justify-content: center;    align-content: center;    background: #777;    flex-flow: column;    border-radius: 10pt;}
+            .content .login-register-area .login-title {text-align: center; font-size: 65pt; padding: 15pt; color: #ffa500; position: relative; top: 20pt;}
+            .content .login-register-area .login-body{    width: 100%;    height: 100%;    padding: 15pt;    box-sizing: border-box;}
+            .content .login-register-area .login-body .field {width: 100%;    height: 40%;    background: white;    display: flex;    flex-flow: column;    align-content: center;    justify-content: center;    padding: 40pt;    box-sizing: border-box;}
+            .content .login-register-area .login-body .field label {font-size: 90pt;    color: #777;}
+            .content .login-register-area .login-body .field input{width: 100%; padding: 12pt 20pt; margin: 8pt 0; display: inline-block;    border: 2pt solid #ffa500;    border-radius: 4pt;    box-sizing: border-box;    height: 100%;    font-size: 44pt;}
+            .content .login-register-area .login-button-area{    position: relative;    height: 20%;    box-sizing: border-box;    background: #555;    display: flex;    flex-flow: row;    justify-content: space-around;    padding: 8pt;    border-radius: 0 0pt 10pt 10pt;}
+            .content .login-register-area .login-button-area span {display: table-cell; vertical-align: middle;}
+            .content .login-register-area .login-button-area .btn-register {width: 40%;    background: orange;    padding: 8pt;    box-sizing: border-box;    color: #FFF;    font-size: 40pt;    text-align: center;    display: table;    border-radius: 10pt; cursor: pointer;}
+            .content .login-register-area .login-button-area .btn-register:hover {background: rgb(243, 185, 77);}
+            .content .login-register-area .login-button-area .btn-login {    width: 40%;    background: green;    padding: 8pt;    box-sizing: border-box;    color: #FFF;    font-size: 40pt;    text-align: center;    display: table;    border-radius: 10pt; cursor: pointer;}
+            .content .login-register-area .login-button-area .btn-login:hover{background: rgb(19, 155, 28);}
+        </style>
+        <body>
+            <div id="content-full" class="content">
+                <!-- LOGIN / REGISTER -->
+                <div class="login-register-area">
+                    <div class="login-title">
+                    Agenda deOz
+                    </div>
+                    <div class="login-body">
+                        <div class="field">
+                            <label for="user">Usuário</label>
+                            <input type="text" placeholder="Digite seu usuário" id="user" />
+                        </div>
+                        <div class="field">
+                            <label for="password">Senha</label>
+                            <input type="password" placeholder="Digite sua senha" id="password" />
+                        </div>
+                    </div>
+                    <div class="login-button-area">
+                        <div class="btn-register">
+                            <span>Cadastre-se</span>
+                        </div>
+                        <div class="btn-login">
+                            <span>Entrar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </head>
+</html>

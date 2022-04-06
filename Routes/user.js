@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken');
 const auth = require('../middlewares/auth');
 const env = require("../config/config");
 
-
 //UTIL
 const createToken = (userId) => {
     return jwt.sign({ id: userId }, env.jwtSenha, { expiresIn: "10M" });
@@ -27,7 +26,7 @@ router.post('/create', async (req, res) => {
 
     try {
         if (await User.findOne({ cpf })) return res.status(400).send({ error: "CPF ja cadastrado !" });
-        if (await User.findOne({ email })) return res.status(400).send({ error: "EMAIL já cadastrado !" });
+        if (await User.findOne({ email })) return res.status(400).send({ error: "EMAIL jï¿½ cadastrado !" });
 
         const user = await User.create(req.body);
 
@@ -42,6 +41,10 @@ router.post('/create', async (req, res) => {
 });
 
 router.post('/auth', async (req, res) => {
+    // res.setHeader('Access-Control-Allow-Origin', '*');
+    // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    // res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
+    // res.setHeader('Access-Control-Allow-Credentials', true); 
     const { cpf, password } = req.body;
     if (!cpf || !password) return res.status(400).send({ error: "Dados insuficientes !" });
 
@@ -70,7 +73,7 @@ router.post('/update', auth, async (req, res) => {
     {        
         const filtro = { id: res.locals.auth_data };        
         const ret = await User.updateOne(filtro, req.body);
-        if (!ret) return res.status(400).send({ error: "usuário não encontrado" });
+        if (!ret) return res.status(400).send({ error: "usuï¿½rio nï¿½o encontrado" });
         const user = await User.findOne(filtro);
         return res.send({ message: ret });
     }

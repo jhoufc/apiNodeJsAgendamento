@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-
+const cors = require("cors");
 
 //ROTAS
 const indexRoute = require("./Routes/index");
@@ -24,7 +24,7 @@ mongoose.connect(url, options);
 
 
 mongoose.connection.on('error', (err) => {
-    console.log('Erro na concexão com banco de dados: ' + err);
+    console.log('Erro na concexï¿½o com banco de dados: ' + err);
 });
 
 mongoose.connection.on('disconnected', () => {
@@ -33,7 +33,7 @@ mongoose.connection.on('disconnected', () => {
 
 
 mongoose.connection.on('connected', () => {
-    console.log('Conexão realizada com sucesso !');
+    console.log('Conexï¿½o realizada com sucesso !');
 });
 
 
@@ -41,6 +41,9 @@ mongoose.connection.on('connected', () => {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //mongodb+srv://deoz_user:<password>@cluster0.7lcvj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+
+
+app.use(cors());
 
 //ROTAS
 app.use('/', indexRoute);
@@ -63,8 +66,8 @@ module.exports = app;
  * 202 - Accepted !
  * 
  * 400 - Bad Request !
- * 401 - Unauthorized ! (AUTENTICAÇÃO, tem carater temporario)
- * 403 - Forbidden ! (AUTORIZAÇÃO, tem carater permanente)
+ * 401 - Unauthorized ! (AUTENTICAï¿½ï¿½O, tem carater temporario)
+ * 403 - Forbidden ! (AUTORIZAï¿½ï¿½O, tem carater permanente)
  * 404 - Not Found !
  * 
  * 500 - Internal Server Error !
