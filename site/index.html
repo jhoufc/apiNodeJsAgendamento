@@ -28,7 +28,7 @@
                 data: JSON.stringify({cpf: user,password: password }),
                 success: function(result) 
                 {
-                    console.log(result);
+                    alert("login realizado com sucesso, bem vindo(a), " + result.user.nomeExibicao);
                     // if(result.d.Success){
                     //     if(result.d.Data != null)
                     //     {
@@ -38,7 +38,7 @@
                 },
                 error: function(err)
                 {
-                    console.log(err);
+                    alert(err.responseJSON.error) ;
                 }
             });    
         }
